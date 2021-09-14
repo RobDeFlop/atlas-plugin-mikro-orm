@@ -16,7 +16,8 @@ export class MikroService {
 
     try {
       this.databaseConnection = await MikroORM.init(config);
-      this.isConnected = true;
+      await this.databaseConnection.getMigrator().up;
+      await this.databaseConnection.getSchemaGenerator().updateSchema()
     } catch (err) {
       UtilsService.logError('Failed to connect to database', err);
       throw err;
@@ -26,6 +27,7 @@ export class MikroService {
     UtilsService.logLoaded('MikroORMService');
 
     this.entityManager = this.databaseConnection.em;
+    this.isConnected = true;
   }
 
   /**
@@ -47,9 +49,9 @@ export class MikroService {
       host: process.env.DB_HOST,
       port: Number(process.env.DB_PORT),
       user: process.env.DB_USER,
-      password: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
       entities: registeredEntities,
-      debug: process.env.NODE_ENV === 'development'
+      debug: process.env.ATLAS_PRODUCTION === 'false'
     } as Options;
   }
 

@@ -27,7 +27,8 @@
     "local:pack": "rimraf dist/src && yarn pack --filename atlas-plugin-mikroorm.tgz"
   },
   "dependencies": {
-    "@mikro-orm/core": "^4.5.9"
+    "@mikro-orm/core": "^4.5.9",
+    "@mikro-orm/migrations": "^4.5.9"
   },
   "devDependencies": {
     "@abstractflo/atlas-devtools": "github:abstractflo/atlas#build-devtools",
