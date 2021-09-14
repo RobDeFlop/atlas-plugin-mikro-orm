@@ -3,13 +3,13 @@ import { EntityManager, MikroORM, Options } from '@mikro-orm/core';
 import { Symbols } from '../symbols';
 
 @Singleton
-export class MikroOrmService {
+export class MikroService {
 
   public entityManager: EntityManager;
   private databaseConnection: MikroORM;
   private isConnected: boolean = false;
 
-  @Init()
+  @Init(-1)
   public async initConnection(): Promise<void> {
     if (this.isConnected) return;
     const config = this.generateConfig();
