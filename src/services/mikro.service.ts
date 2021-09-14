@@ -15,9 +15,7 @@ export class MikroService {
     const config = this.generateConfig();
 
     try {
-      this.databaseConnection = await MikroORM.init(config);
-      await this.databaseConnection.getMigrator().up;
-      await this.databaseConnection.getSchemaGenerator().updateSchema()
+      await this.setupDatabase(config);
     } catch (err) {
       UtilsService.logError('Failed to connect to database', err);
       throw err;
@@ -28,6 +26,18 @@ export class MikroService {
 
     this.entityManager = this.databaseConnection.em;
     this.isConnected = true;
+  }
+
+  /**
+   * Connects to database and does a migration
+   * @param {Options} config
+   * @returns {Promise<void>}
+   * @private
+   */
+  private async setupDatabase(config: Options): Promise<void> {
+    this.databaseConnection = await MikroORM.init(config);
+    await this.databaseConnection.getMigrator().up;
+    await this.databaseConnection.getSchemaGenerator().updateSchema();
   }
 
   /**
@@ -51,7 +61,7 @@ export class MikroService {
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       entities: registeredEntities,
-      debug: process.env.ATLAS_PRODUCTION === 'false'
+      debug: process.env.DB_DEBUG === 'true'
     } as Options;
   }
 
