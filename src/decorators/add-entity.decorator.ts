@@ -9,7 +9,7 @@ import { Entity, EntityOptions } from '@mikro-orm/core';
  * @param options
  */
 export function AddEntity(options?: EntityOptions<any>): (target: constructor<any>) => void {
-  return function(target: constructor<any>){
+  return function (target: constructor<any>) {
     const mikroService = app.resolve(MikroService);
     const databaseEntities = getFrameworkMetaData<constructor<any>[]>(Symbols.MIKRO_ENTITIES, mikroService);
     const doesEntityExists = databaseEntities.find((entity: constructor<any>) => entity === target);
@@ -22,7 +22,7 @@ export function AddEntity(options?: EntityOptions<any>): (target: constructor<an
     Reflect.defineMetadata<constructor<any>[]>(Symbols.MIKRO_ENTITIES, databaseEntities, mikroService);
 
     return target;
-  }
+  };
 
 }
 
