@@ -14,12 +14,7 @@ export class MikroService {
     if (this.isConnected) return;
     const config = this.generateConfig();
 
-    try {
-      await this.setupDatabase(config);
-    } catch (err) {
-      UtilsService.logError('Failed to connect to database', err);
-      throw err;
-    }
+    await this.setupDatabase(config);
 
     UtilsService.logRegisteredHandlers('MikroORMService', config.entities.length);
     UtilsService.logLoaded('MikroORMService');
@@ -35,9 +30,14 @@ export class MikroService {
    * @private
    */
   private async setupDatabase(config: Options): Promise<void> {
-    this.databaseConnection = await MikroORM.init(config);
-    await this.databaseConnection.getMigrator().up;
-    await this.databaseConnection.getSchemaGenerator().updateSchema();
+    try {
+      this.databaseConnection = await MikroORM.init(config);
+      await this.databaseConnection.getMigrator().up;
+      await this.databaseConnection.getSchemaGenerator().updateSchema();
+    } catch (e) {
+      UtilsService.logError(e);
+      throw e;
+    }
   }
 
   /**
