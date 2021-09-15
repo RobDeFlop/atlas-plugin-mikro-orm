@@ -1,6 +1,5 @@
 name: Continuous Delivery - Plugin MikroORM
 
-
 on:
   push:
     branches:
