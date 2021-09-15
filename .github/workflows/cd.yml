@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ./**
+      - '**.ts'
       - package.json
       - .github/workflows/cd.yml
 
