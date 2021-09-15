@@ -7,7 +7,7 @@ on:
     paths:
       - ./**
       - package.json
-      - .github/workflows/cd-plugin-typeorm.yml
+      - .github/workflows/cd.yml
 
 jobs:
   pre_ci:
