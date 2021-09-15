@@ -1,5 +1,5 @@
 {
-  "name": "@robdeflop/atlas-plugin-mikroorm",
+  "name": "@robdeflop/atlas-plugin-mikro-orm",
   "version": "0.0.1",
   "description": "Mikro-ORM integration for atlas framework",
   "author": "RobDeFlop",
