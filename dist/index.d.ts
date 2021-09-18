@@ -1,3 +1,4 @@
+import { AnyEntity } from '@mikro-orm/core';
 import { constructor } from '@abstractflo/atlas-shared';
 import { EntityManager } from '@mikro-orm/core';
 import { EntityOptions } from '@mikro-orm/core';
@@ -39,7 +40,7 @@ export declare class MikroService {
 
 export declare abstract class Repository<T> {
     protected entityType: new (...args: any[]) => T;
-    protected get repository(): EntityRepository<T>;
+    protected repository(): EntityRepository<AnyEntity<unknown>>;
 }
 
 
