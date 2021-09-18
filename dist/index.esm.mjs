@@ -110,6 +110,9 @@ function AddEmbeddable(target) {
 
 class Repository {
     entityType;
+    constructor(entityType) {
+        this.entityType = entityType;
+    }
     get repository() {
         const mikroService = app.resolve(MikroService);
         return mikroService.entityManager.getRepository(this.entityType);

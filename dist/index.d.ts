@@ -37,8 +37,9 @@ export declare class MikroService {
     private generateConfig;
 }
 
-export declare abstract class Repository<T> {
-    protected entityType: new (...args: any[]) => T;
+export declare class Repository<T> {
+    entityType: new (...args: any[]) => T;
+    constructor(entityType: new (...args: any[]) => T);
     protected get repository(): EntityRepository<T>;
 }
 
