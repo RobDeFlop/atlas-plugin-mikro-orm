@@ -1,6 +1,7 @@
 import { constructor } from '@abstractflo/atlas-shared';
 import { EntityManager } from '@mikro-orm/core';
 import { EntityOptions } from '@mikro-orm/core';
+import { EntityRepository } from '@mikro-orm/core';
 
 /**
  * Decorator to register embeddables automatically
@@ -38,7 +39,7 @@ export declare class MikroService {
 
 export declare abstract class Repository<T> {
     protected entityType: new (...args: any[]) => T;
-    protected get repository(): Repository<T>;
+    protected get repository(): EntityRepository<T>;
 }
 
 
