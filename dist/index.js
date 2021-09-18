@@ -113,9 +113,9 @@ function AddEmbeddable(target) {
 
 class Repository {
     entityType;
-    repository() {
+    get repository() {
         const mikroService = atlasShared.app.resolve(exports.MikroService);
-        return mikroService.entityManager.getRepository(typeof this.entityType);
+        return mikroService.entityManager.getRepository(this.entityType);
     }
 }
 
